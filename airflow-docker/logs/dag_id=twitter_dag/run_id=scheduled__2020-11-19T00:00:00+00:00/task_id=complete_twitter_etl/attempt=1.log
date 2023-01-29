@@ -1,0 +1,283 @@
+[2023-01-25T18:40:32.320+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-25T18:40:32.389+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-25T18:40:32.391+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-25T18:40:32.395+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-01-25T18:40:32.398+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-25T18:40:33.238+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2020-11-19 00:00:00+00:00
+[2023-01-25T18:40:33.461+0000] {standard_task_runner.py:55} INFO - Started process 327 to run task
+[2023-01-25T18:40:33.550+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'scheduled__2020-11-19T00:00:00+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmp4th2ibd8']
+[2023-01-25T18:40:33.592+0000] {standard_task_runner.py:83} INFO - Job 14: Subtask complete_twitter_etl
+[2023-01-25T18:40:35.144+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [running]> on host 512d0ff0785b
+[2023-01-25T18:40:42.670+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2020-11-19T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-11-19T00:00:00+00:00
+[2023-01-25T18:41:05.361+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/s3fs/core.py", line 112, in _error_wrapper
+    return await func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/aiobotocore/client.py", line 358, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (AccessDenied) when calling the CreateBucket operation: Anonymous access is forbidden for this operation
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/twitter_etl.py", line 46, in run_twitter_etl
+    df.to_csv("s3://jinchoi-airflow-bucket/data/elonmusk_tweets.csv")
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/generic.py", line 3482, in to_csv
+    storage_options=storage_options,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/formats/format.py", line 1105, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/formats/csvs.py", line 243, in save
+    storage_options=self.storage_options,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/common.py", line 614, in get_handle
+    storage_options=storage_options,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/common.py", line 370, in _get_filepath_or_buffer
+    filepath_or_buffer, mode=fsspec_mode, **(storage_options or {})
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/core.py", line 428, in open
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/core.py", line 283, in open_files
+    [fs.makedirs(parent, exist_ok=True) for parent in parents]
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/core.py", line 283, in <listcomp>
+    [fs.makedirs(parent, exist_ok=True) for parent in parents]
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/asyn.py", line 114, in wrapper
+    return sync(self.loop, func, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/asyn.py", line 99, in sync
+    raise return_result
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/asyn.py", line 54, in _runner
+    result[0] = await coro
+  File "/home/airflow/.local/lib/python3.7/site-packages/s3fs/core.py", line 883, in _makedirs
+    await self._mkdir(path, create_parents=True)
+  File "/home/airflow/.local/lib/python3.7/site-packages/s3fs/core.py", line 868, in _mkdir
+    await self._call_s3("create_bucket", **params)
+  File "/home/airflow/.local/lib/python3.7/site-packages/s3fs/core.py", line 340, in _call_s3
+    method, kwargs=additional_kwargs, retries=self.retries
+  File "/home/airflow/.local/lib/python3.7/site-packages/s3fs/core.py", line 139, in _error_wrapper
+    raise err
+PermissionError: Anonymous access is forbidden for this operation
+[2023-01-25T18:41:05.775+0000] {taskinstance.py:1323} INFO - Marking task as UP_FOR_RETRY. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20201119T000000, start_date=20230125T184032, end_date=20230125T184105
+[2023-01-25T18:41:06.786+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 14 for task complete_twitter_etl (Anonymous access is forbidden for this operation; 327)
+[2023-01-25T18:41:07.834+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-01-25T18:41:08.362+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-01-26T03:22:36.361+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T03:22:36.507+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T03:22:36.516+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T03:22:36.521+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-01-26T03:22:36.538+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T03:22:37.660+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2020-11-19 00:00:00+00:00
+[2023-01-26T03:22:37.733+0000] {standard_task_runner.py:55} INFO - Started process 162 to run task
+[2023-01-26T03:22:37.754+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'scheduled__2020-11-19T00:00:00+00:00', '--job-id', '18', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmpnwyppc6p']
+[2023-01-26T03:22:37.766+0000] {standard_task_runner.py:83} INFO - Job 18: Subtask complete_twitter_etl
+[2023-01-26T03:22:38.283+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [running]> on host 3db080823b1b
+[2023-01-26T03:22:39.108+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2020-11-19T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-11-19T00:00:00+00:00
+[2023-01-26T03:22:39.956+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/twitter_etl.py", line 53, in run_twitter_etl
+    df.to_csv('s3://{BUCKET_NAME}/data/{KEY}', index=False, header=False,sep=',', engine='python', filesystem=s3)
+TypeError: to_csv() got an unexpected keyword argument 'engine'
+[2023-01-26T03:22:40.020+0000] {taskinstance.py:1323} INFO - Marking task as UP_FOR_RETRY. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20201119T000000, start_date=20230126T032236, end_date=20230126T032240
+[2023-01-26T03:22:40.081+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 18 for task complete_twitter_etl (to_csv() got an unexpected keyword argument 'engine'; 162)
+[2023-01-26T03:22:40.288+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-01-26T03:22:40.428+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-01-26T03:34:15.241+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T03:34:15.371+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T03:34:15.376+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T03:34:15.378+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-01-26T03:34:15.385+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T03:34:15.605+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2020-11-19 00:00:00+00:00
+[2023-01-26T03:34:15.662+0000] {standard_task_runner.py:55} INFO - Started process 146 to run task
+[2023-01-26T03:34:15.693+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'scheduled__2020-11-19T00:00:00+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmpdl02ruc4']
+[2023-01-26T03:34:15.697+0000] {standard_task_runner.py:83} INFO - Job 14: Subtask complete_twitter_etl
+[2023-01-26T03:34:16.154+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [running]> on host 9c4f31e2db2b
+[2023-01-26T03:34:18.228+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2020-11-19T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-11-19T00:00:00+00:00
+[2023-01-26T03:34:19.550+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/twitter_etl.py", line 54, in run_twitter_etl
+    s3.put('s3://{BUCKET_NAME}/data/{KEY}', csv_buffer)
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/asyn.py", line 114, in wrapper
+    return sync(self.loop, func, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/asyn.py", line 99, in sync
+    raise return_result
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/asyn.py", line 54, in _runner
+    result[0] = await coro
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/asyn.py", line 481, in _put
+    rpath = self._strip_protocol(rpath)
+  File "/home/airflow/.local/lib/python3.7/site-packages/fsspec/spec.py", line 188, in _strip_protocol
+    if path.startswith(protocol + "://"):
+TypeError: startswith first arg must be bytes or a tuple of bytes, not str
+[2023-01-26T03:34:19.569+0000] {taskinstance.py:1323} INFO - Marking task as UP_FOR_RETRY. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20201119T000000, start_date=20230126T033415, end_date=20230126T033419
+[2023-01-26T03:34:19.606+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 14 for task complete_twitter_etl (startswith first arg must be bytes or a tuple of bytes, not str; 146)
+[2023-01-26T03:34:19.677+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-01-26T03:34:19.709+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-01-26T05:59:29.402+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T05:59:29.477+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T05:59:29.482+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T05:59:29.485+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-01-26T05:59:29.497+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T05:59:32.885+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2020-11-19 00:00:00+00:00
+[2023-01-26T05:59:32.930+0000] {standard_task_runner.py:55} INFO - Started process 955 to run task
+[2023-01-26T05:59:33.647+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'scheduled__2020-11-19T00:00:00+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmpu0qbqlji']
+[2023-01-26T05:59:33.695+0000] {standard_task_runner.py:83} INFO - Job 16: Subtask complete_twitter_etl
+[2023-01-26T05:59:44.948+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [running]> on host 864c120ca3c2
+[2023-01-26T05:59:45.526+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2020-11-19T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-11-19T00:00:00+00:00
+[2023-01-26T05:59:46.330+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/twitter_etl.py", line 51, in run_twitter_etl
+    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+  File "/usr/local/lib/python3.7/os.py", line 681, in __getitem__
+    raise KeyError(key) from None
+KeyError: 'AWS_ACCESS_KEY_ID'
+[2023-01-26T05:59:46.373+0000] {taskinstance.py:1323} INFO - Marking task as UP_FOR_RETRY. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20201119T000000, start_date=20230126T055929, end_date=20230126T055946
+[2023-01-26T05:59:46.477+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 16 for task complete_twitter_etl ('AWS_ACCESS_KEY_ID'; 955)
+[2023-01-26T05:59:46.938+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-01-26T05:59:47.637+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-01-26T06:59:37.528+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T06:59:37.651+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T06:59:37.663+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T06:59:37.666+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-01-26T06:59:37.672+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T06:59:37.792+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2020-11-19 00:00:00+00:00
+[2023-01-26T06:59:37.803+0000] {standard_task_runner.py:55} INFO - Started process 139 to run task
+[2023-01-26T06:59:37.822+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'scheduled__2020-11-19T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmplvzp489_']
+[2023-01-26T06:59:37.856+0000] {standard_task_runner.py:83} INFO - Job 15: Subtask complete_twitter_etl
+[2023-01-26T06:59:40.654+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [running]> on host 2221c1ebf970
+[2023-01-26T06:59:41.056+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2020-11-19T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-11-19T00:00:00+00:00
+[2023-01-26T06:59:42.553+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/twitter_etl.py", line 63, in run_twitter_etl
+    s3.Object(BUCKET_NAME, KEY).put(Body=csv_buffer.getvalue())
+  File "/home/airflow/.local/lib/python3.7/site-packages/botocore/client.py", line 839, in __getattr__
+    f"'{self.__class__.__name__}' object has no attribute '{item}'"
+AttributeError: 'S3' object has no attribute 'Object'
+[2023-01-26T06:59:42.589+0000] {taskinstance.py:1323} INFO - Marking task as UP_FOR_RETRY. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20201119T000000, start_date=20230126T065937, end_date=20230126T065942
+[2023-01-26T06:59:42.652+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 15 for task complete_twitter_etl ('S3' object has no attribute 'Object'; 139)
+[2023-01-26T06:59:42.783+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-01-26T06:59:42.831+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-01-26T08:02:07.944+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T08:02:08.037+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T08:02:08.044+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T08:02:08.046+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-01-26T08:02:08.047+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T08:02:08.210+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2020-11-19 00:00:00+00:00
+[2023-01-26T08:02:08.327+0000] {standard_task_runner.py:55} INFO - Started process 444 to run task
+[2023-01-26T08:02:08.325+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'scheduled__2020-11-19T00:00:00+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmpibu04cq8']
+[2023-01-26T08:02:08.351+0000] {standard_task_runner.py:83} INFO - Job 12: Subtask complete_twitter_etl
+[2023-01-26T08:02:21.269+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [running]> on host 3143b9e5b257
+[2023-01-26T08:02:23.361+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2020-11-19T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-11-19T00:00:00+00:00
+[2023-01-26T08:02:27.226+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/twitter_etl.py", line 64, in run_twitter_etl
+    s3.Object(BUCKET_NAME, KEY).put(Body=csv_buffer.getvalue())
+  File "/home/airflow/.local/lib/python3.7/site-packages/boto3/resources/factory.py", line 580, in do_action
+    response = action(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/boto3/resources/action.py", line 88, in __call__
+    response = getattr(parent.meta.client, operation_name)(*args, **params)
+  File "/home/airflow/.local/lib/python3.7/site-packages/botocore/client.py", line 508, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/botocore/client.py", line 915, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (InvalidAccessKeyId) when calling the PutObject operation: The AWS Access Key Id you provided does not exist in our records.
+[2023-01-26T08:02:27.309+0000] {taskinstance.py:1323} INFO - Marking task as UP_FOR_RETRY. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20201119T000000, start_date=20230126T080207, end_date=20230126T080227
+[2023-01-26T08:02:27.790+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 12 for task complete_twitter_etl (An error occurred (InvalidAccessKeyId) when calling the PutObject operation: The AWS Access Key Id you provided does not exist in our records.; 444)
+[2023-01-26T08:02:28.043+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-01-26T08:02:29.245+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-01-26T09:07:40.470+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T09:07:40.741+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [queued]>
+[2023-01-26T09:07:40.751+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T09:07:40.755+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-01-26T09:07:40.760+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T09:07:41.125+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2020-11-19 00:00:00+00:00
+[2023-01-26T09:07:41.357+0000] {standard_task_runner.py:55} INFO - Started process 151 to run task
+[2023-01-26T09:07:41.410+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'scheduled__2020-11-19T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmpmf83mk_5']
+[2023-01-26T09:07:41.423+0000] {standard_task_runner.py:83} INFO - Job 15: Subtask complete_twitter_etl
+[2023-01-26T09:08:10.440+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2020-11-19T00:00:00+00:00 [running]> on host d0fc3b00c15c
+[2023-01-26T09:08:12.277+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2020-11-19T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2020-11-19T00:00:00+00:00
+[2023-01-26T09:08:16.510+0000] {python.py:177} INFO - Done. Returned value was: None
+[2023-01-26T09:08:16.565+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20201119T000000, start_date=20230126T090740, end_date=20230126T090816
+[2023-01-26T09:08:16.851+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-01-26T09:08:20.243+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

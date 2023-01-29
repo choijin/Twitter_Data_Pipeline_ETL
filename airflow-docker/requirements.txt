@@ -1,0 +1,5 @@
+tweety
+pandas 
+tweepy 
+s3fs
+boto3

@@ -1,0 +1,35 @@
+[2023-01-26T06:04:31.560+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl manual__2023-01-26T05:58:58.758675+00:00 [queued]>
+[2023-01-26T06:04:31.601+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl manual__2023-01-26T05:58:58.758675+00:00 [queued]>
+[2023-01-26T06:04:31.603+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T06:04:31.604+0000] {taskinstance.py:1280} INFO - Starting attempt 2 of 2
+[2023-01-26T06:04:31.605+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T06:04:31.669+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2023-01-26 05:58:58.758675+00:00
+[2023-01-26T06:04:31.686+0000] {standard_task_runner.py:55} INFO - Started process 1102 to run task
+[2023-01-26T06:04:31.707+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'manual__2023-01-26T05:58:58.758675+00:00', '--job-id', '20', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmp28uno9p4']
+[2023-01-26T06:04:31.711+0000] {standard_task_runner.py:83} INFO - Job 20: Subtask complete_twitter_etl
+[2023-01-26T06:04:32.722+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl manual__2023-01-26T05:58:58.758675+00:00 [running]> on host 864c120ca3c2
+[2023-01-26T06:04:32.945+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2023-01-26T05:58:58.758675+00:00
+AIRFLOW_CTX_TRY_NUMBER=2
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-01-26T05:58:58.758675+00:00
+[2023-01-26T06:04:33.600+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/twitter_etl.py", line 51, in run_twitter_etl
+    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+  File "/usr/local/lib/python3.7/os.py", line 681, in __getitem__
+    raise KeyError(key) from None
+KeyError: 'AWS_ACCESS_KEY_ID'
+[2023-01-26T06:04:33.618+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20230126T055858, start_date=20230126T060431, end_date=20230126T060433
+[2023-01-26T06:04:33.679+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 20 for task complete_twitter_etl ('AWS_ACCESS_KEY_ID'; 1102)
+[2023-01-26T06:04:33.778+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-01-26T06:04:33.820+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

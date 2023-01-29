@@ -1,0 +1,33 @@
+[2023-01-26T03:23:37.328+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl manual__2023-01-26T03:22:13.300937+00:00 [queued]>
+[2023-01-26T03:23:37.348+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl manual__2023-01-26T03:22:13.300937+00:00 [queued]>
+[2023-01-26T03:23:37.349+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T03:23:37.350+0000] {taskinstance.py:1280} INFO - Starting attempt 2 of 2
+[2023-01-26T03:23:37.351+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T03:23:37.390+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2023-01-26 03:22:13.300937+00:00
+[2023-01-26T03:23:37.401+0000] {standard_task_runner.py:55} INFO - Started process 236 to run task
+[2023-01-26T03:23:37.407+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'manual__2023-01-26T03:22:13.300937+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmpbu_cor1z']
+[2023-01-26T03:23:37.409+0000] {standard_task_runner.py:83} INFO - Job 22: Subtask complete_twitter_etl
+[2023-01-26T03:23:37.975+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl manual__2023-01-26T03:22:13.300937+00:00 [running]> on host 3db080823b1b
+[2023-01-26T03:23:38.225+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2023-01-26T03:22:13.300937+00:00
+AIRFLOW_CTX_TRY_NUMBER=2
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-01-26T03:22:13.300937+00:00
+[2023-01-26T03:23:39.206+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/twitter_etl.py", line 53, in run_twitter_etl
+    df.to_csv('s3://{BUCKET_NAME}/data/{KEY}', index=False, header=False,sep=',', engine='python', filesystem=s3)
+TypeError: to_csv() got an unexpected keyword argument 'engine'
+[2023-01-26T03:23:39.227+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20230126T032213, start_date=20230126T032337, end_date=20230126T032339
+[2023-01-26T03:23:39.282+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 22 for task complete_twitter_etl (to_csv() got an unexpected keyword argument 'engine'; 236)
+[2023-01-26T03:23:39.444+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-01-26T03:23:39.731+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

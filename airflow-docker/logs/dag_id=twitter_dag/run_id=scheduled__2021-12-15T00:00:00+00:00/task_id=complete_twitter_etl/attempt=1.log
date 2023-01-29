@@ -1,0 +1,24 @@
+[2023-01-26T07:20:34.602+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2021-12-15T00:00:00+00:00 [queued]>
+[2023-01-26T07:20:34.844+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2021-12-15T00:00:00+00:00 [queued]>
+[2023-01-26T07:20:34.848+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T07:20:34.855+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-01-26T07:20:34.866+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-01-26T07:20:35.372+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): complete_twitter_etl> on 2021-12-15 00:00:00+00:00
+[2023-01-26T07:20:35.472+0000] {standard_task_runner.py:55} INFO - Started process 2392 to run task
+[2023-01-26T07:20:35.521+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'twitter_dag', 'complete_twitter_etl', 'scheduled__2021-12-15T00:00:00+00:00', '--job-id', '441', '--raw', '--subdir', 'DAGS_FOLDER/twitter_dag.py', '--cfg-path', '/tmp/tmpyzaad_yp']
+[2023-01-26T07:20:35.527+0000] {standard_task_runner.py:83} INFO - Job 441: Subtask complete_twitter_etl
+[2023-01-26T07:20:37.349+0000] {task_command.py:388} INFO - Running <TaskInstance: twitter_dag.complete_twitter_etl scheduled__2021-12-15T00:00:00+00:00 [running]> on host 2221c1ebf970
+[2023-01-26T07:20:37.913+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=twitter_dag
+AIRFLOW_CTX_TASK_ID=complete_twitter_etl
+AIRFLOW_CTX_EXECUTION_DATE=2021-12-15T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-12-15T00:00:00+00:00
+[2023-01-26T07:20:40.456+0000] {python.py:177} INFO - Done. Returned value was: None
+[2023-01-26T07:20:40.538+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=twitter_dag, task_id=complete_twitter_etl, execution_date=20211215T000000, start_date=20230126T072034, end_date=20230126T072040
+[2023-01-26T07:20:40.872+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-01-26T07:20:42.591+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
