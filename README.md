@@ -36,6 +36,10 @@ Data engineering project using Airflow to perform ETL process on Twitter data an
 * Build the **Docker Images**: Run the docker-compose build command to build the Docker images from the Dockerfile.
 * Start the **Containers**: Use the docker-compose up command to start the containers and bring up the services.
 
+![](/images/docker-compose.png)
+
+(example of docker-compose.yml)
+
 ### What is Airflow?
 
 * Apache Airflow is an open-source platform to programmatically author, schedule, and monitor workflows. 
