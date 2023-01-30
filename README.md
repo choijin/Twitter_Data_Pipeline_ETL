@@ -32,13 +32,19 @@ Data engineering project using Airflow to perform ETL process on Twitter data an
 ### Steps
 
 * Create a **Dockerfile**: This is a script that specifies the base image and the necessary dependencies for running Airflow. An **image** is a pre-configured environment that includes all the necessary components, such as libraries, dependencies, and application code, to run a specific application. 
-* Create a docker-compose.yml file: This file specifies the services, networks, and volumes to be used in the Docker Compose setup.
-* Build the Docker Images: Run the docker-compose build command to build the Docker images from the Dockerfile.
-* Start the Containers: Use the docker-compose up command to start the containers and bring up the services.
+* Create a **docker-compose.yml** file: This file specifies the services, networks, and volumes to be used in the Docker Compose setup.
+* Build the **Docker Images**: Run the docker-compose build command to build the Docker images from the Dockerfile.
+* Start the **Containers**: Use the docker-compose up command to start the containers and bring up the services.
 
-![](/images/Dockerfile.png) 
+### What is Airflow?
 
-This Dockerfile starts with a base Python image and installs the dependencies necessary to run Airflow. It then copies a file named requirements.txt and installs the required packages.
+* Apache Airflow is an open-source platform to programmatically author, schedule, and monitor workflows. 
+
+* Apache Airflow works by defining workflows as DAGs in Python, scheduling the workflows, executing the tasks on worker nodes, and monitoring the progress and results of the workflows through the Airflow web UI or API.
+
+![](/images/dag.png) 
+
+The above DAG demonstrates the pipeline for this project. Once the task of extracting and transforming is complete, it triggers the next task, which is the loading task, to store the file into AWS S3.
 
 ## Part II. Extraction and Transformation
 
