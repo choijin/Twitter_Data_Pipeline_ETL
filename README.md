@@ -62,13 +62,17 @@ The above DAG demonstrates the pipeline for this project. Once the task of extra
 ## Part III. Loading Data
 
 ### Why use AWS S3 for storing files?
-S3 makes it easy to store and access your files from anywhere. It is cheap, reliable, and secure, making it a good option for storing important files and data. You can access your files from anywhere on the web and it integrates with other AWS services for more complex solutions.
+* S3 makes it easy to store and access your files from anywhere. It is cheap, reliable, and secure, making it a good option for storing important files and data. You can access your files from anywhere on the web and it integrates with other AWS services for more complex solutions.
 
+### What is boto3?
+* Boto3 is the Amazon Web Services (AWS) SDK for Python, which allows Python developers to write software that makes use of services like Amazon S3 and Amazon EC2. Boto3 makes it easy to integrate your Python application, library, or script with AWS services. 
+
+### Steps
 * Create S3 bucket in AWS
 
 ![](/images/bucket.png)
 
 * Use boto3 to interact with S3 buckets and objects
-* Apply **os.environ['']** command to access .env files (by using os.environ to access the values stored in the .env file, you can keep sensitive information separate from your application code)
+* Apply **os.environ** command to access .env files (this way, you can keep sensitive information separate from your application code)
 
 
