@@ -38,7 +38,7 @@ Data engineering project using Airflow to perform ETL process on Twitter data an
 
 ![](/images/docker-compose.png)
 
-The above image illustrates an example of docker-compose.yml.
+(example of docker-compose.yml)
 
 ### What is Airflow?
 
