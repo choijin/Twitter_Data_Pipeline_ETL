@@ -29,6 +29,16 @@ Data engineering project using Airflow to perform ETL process on Twitter data an
 
 * Additionally, Docker Compose allows for easy scaling of the application by allowing you to add or remove containers as needed. This simplifies the process of managing complex, multi-container applications.
 
+### What is Airflow?
+
+* Apache Airflow is an open-source platform to programmatically author, schedule, and monitor workflows. 
+
+* Apache Airflow works by defining workflows as DAGs in Python, scheduling the workflows, executing the tasks on worker nodes, and monitoring the progress and results of the workflows through the Airflow web UI or API.
+
+![](/images/dag.png) 
+
+The above DAG demonstrates the pipeline for this project. Once the task of extracting and transforming is complete, it triggers the next task, which is the loading task, to store the file into AWS S3.
+
 ### Steps
 
 * Create a **Dockerfile**: This is a script that specifies the base image and the necessary dependencies for running Airflow. An **image** is a pre-configured environment that includes all the necessary components, such as libraries, dependencies, and application code, to run a specific application. 
@@ -40,16 +50,6 @@ Data engineering project using Airflow to perform ETL process on Twitter data an
 
 (A snippet of docker-compose.yml)
 
-### What is Airflow?
-
-* Apache Airflow is an open-source platform to programmatically author, schedule, and monitor workflows. 
-
-* Apache Airflow works by defining workflows as DAGs in Python, scheduling the workflows, executing the tasks on worker nodes, and monitoring the progress and results of the workflows through the Airflow web UI or API.
-
-![](/images/dag.png) 
-
-The above DAG demonstrates the pipeline for this project. Once the task of extracting and transforming is complete, it triggers the next task, which is the loading task, to store the file into AWS S3.
-
 ## Part II. Extraction and Transformation
 
 * Twitter API Elevated Access is required to perform tasks in this project
@@ -58,7 +58,6 @@ The above DAG demonstrates the pipeline for this project. Once the task of extra
 * Extracted 200 tweet posts from Elon Musk, stored the 'text', 'favorite counts', 'retweet counts', and 'time stamp' per each tweet into CSV file
 
 ![](/images/elon.png)
-(CSV file that was generated)
 
 ## Part III. Loading Data
 
@@ -68,8 +67,6 @@ S3 makes it easy to store and access your files from anywhere. It is cheap, reli
 * Create S3 bucket in AWS
 
 ![](/images/bucket.png)
-
-(Creation of S3 bucket)
 
 * Use boto3 to interact with S3 buckets and objects
 * Apply **os.environ['']** command to access .env files (by using os.environ to access the values stored in the .env file, you can keep sensitive information separate from your application code)
