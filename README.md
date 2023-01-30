@@ -15,17 +15,30 @@ Data engineering project using Airflow to perform ETL process on Twitter data an
 ## Objectives
 * Develop a complete ETL process from Twitter data to perform exploratory data analysis and create a visual using Tableau
 
-## Part I. Establishing Docker Environment
+## Part I. Establishing Airflow inside Docker container
 
-### First of all, why use Docker?
+### First of all, what is a Docker?
 
-Docker is used to package, deploy, and run applications in a containerized environment. This allows for consistency and ease of deployment across different environments, as well as improved isolation and resource utilization.
+* Docker is used to package, deploy, and run applications in a containerized environment. This allows for consistency and ease of deployment across different environments, as well as improved isolation and resource utilization.
 
-In essence, Docker allows my code infrastructure to runs the same way every time, no matter where I am running with it.
+* In essence, Docker allows my code infrastructure to runs the same way every time, no matter where I am running with it.
 
-### Then why Docker-compose?
+### And what is Docker-compose?
 
-Docker Compose is a tool for defining and running multi-container Docker applications. Instead of manually starting each individual container, you can define all the containers, their configuration, and their relationships in a single file called a docker-compose.yml file. Using this file, you can spin up all the containers with a single command, making it easier to manage the whole application as a single unit. Additionally, Docker Compose allows for easy scaling of the application by allowing you to add or remove containers as needed. This simplifies the process of managing complex, multi-container applications.
+* Docker Compose is a tool for defining and running multi-container Docker applications. Instead of manually starting each individual container, you can define all the containers, their configuration, and their relationships in a single file called a *docker-compose.yml file*. Using this file, you can spin up all the containers with a single command, making it easier to manage the whole application as a single unit. 
+
+* Additionally, Docker Compose allows for easy scaling of the application by allowing you to add or remove containers as needed. This simplifies the process of managing complex, multi-container applications.
+
+### Steps
+
+* Create a **Dockerfile**: This is a script that specifies the base image and the necessary dependencies for running Airflow. An **image** is a pre-configured environment that includes all the necessary components, such as libraries, dependencies, and application code, to run a specific application. 
+* Create a docker-compose.yml file: This file specifies the services, networks, and volumes to be used in the Docker Compose setup.
+* Build the Docker Images: Run the docker-compose build command to build the Docker images from the Dockerfile.
+* Start the Containers: Use the docker-compose up command to start the containers and bring up the services.
+
+![](/images/Dockerfile.png) 
+
+This Dockerfile starts with a base Python image and installs the dependencies necessary to run Airflow. It then copies a file named requirements.txt and installs the required packages.
 
 ## Part II. Extraction and Transformation
 
