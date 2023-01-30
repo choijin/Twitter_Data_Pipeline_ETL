@@ -38,7 +38,7 @@ Data engineering project using Airflow to perform ETL process on Twitter data an
 
 ![](/images/docker-compose.png)
 
-(example of docker-compose.yml)
+(A snippet of docker-compose.yml)
 
 ### What is Airflow?
 
@@ -57,8 +57,17 @@ The above DAG demonstrates the pipeline for this project. Once the task of extra
 * The tweet posts to extract was tweets from Elon Musk, one of the influential people in the world
 * Extracted 200 tweet posts from Elon Musk, stored the 'text', 'favorite counts', 'retweet counts', and 'time stamp' per each tweet into CSV file
 
+![](/images/elon.png)
+(CSV file that was generated)
+
 ## Part III. Loading Data
 
+* Create S3 bucket in AWS
 
+![](/images/bucket.png)
+(Creation of S3 bucket)
+
+* Use boto3 to interact with S3 buckets and objects
+* Apply **os.environ['']** command to access .env files (by using os.environ to access the values stored in the .env file, you can keep sensitive information separate from your application code)
 
 
