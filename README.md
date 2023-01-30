@@ -74,5 +74,8 @@ The above DAG demonstrates the pipeline for this project. Once the task of extra
 
 * Use boto3 to interact with S3 buckets and objects
 * Apply **os.environ** command to access .env files (this way, you can keep sensitive information separate from your application code)
+* Read the csv using Pandas library and store the data into S3 by calling **boto3.Session.resource.Object.put()**
+
+![](/images/boto3.png)
 
 
