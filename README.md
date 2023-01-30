@@ -78,4 +78,6 @@ The above DAG demonstrates the pipeline for this project. Once the task of extra
 
 ![](/images/boto3.png)
 
-
+## Future assignments
+* Import the file from S3 bucket and conduct various exploratory analysis
+* Visualize the outcome using Tableau Dashboard
