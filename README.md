@@ -62,9 +62,13 @@ The above DAG demonstrates the pipeline for this project. Once the task of extra
 
 ## Part III. Loading Data
 
+### Why use AWS S3 for storing files?
+S3 makes it easy to store and access your files from anywhere. It is cheap, reliable, and secure, making it a good option for storing important files and data. You can access your files from anywhere on the web and it integrates with other AWS services for more complex solutions.
+
 * Create S3 bucket in AWS
 
 ![](/images/bucket.png)
+
 (Creation of S3 bucket)
 
 * Use boto3 to interact with S3 buckets and objects
