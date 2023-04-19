@@ -21,7 +21,7 @@ Data engineering project using Airflow to perform ETL process on Twitter data an
 
 * Docker is used to package, deploy, and run applications in a containerized environment. This allows for consistency and ease of deployment across different environments, as well as improved isolation and resource utilization.
 
-* In essence, Docker allows my code infrastructure to runs the same way every time, no matter where I am running with it.
+* In essence, Docker allows my code infrastructure to run the same way every time, no matter where I am running with it.
 
 ### And what is Docker-compose?
 
